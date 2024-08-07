@@ -1,11 +1,14 @@
 module.exports = {
-  title: "My Blog",
+  title: "NS-Blog",
   description: "Record a wonderful life",
   base: "/ns-blog/",
   locales: {
     "/": {
       lang: "zh-CN",
     },
+  },
+  markdown: {
+    lineNumbers: true,
   },
   theme: "reco",
   themeConfig: {
@@ -36,15 +39,21 @@ module.exports = {
         collapsable: false, // 不折叠
         children: [{ title: "简述", path: "/" }],
       },
+      // {
+      //   title: "文件处理",
+      //   path: "/fileHandle/upload",
+      //   collapsable: false,
+      //   children: [
+      //     { title: "上传", path: "/fileHandle/upload" },
+      //     { title: "下载", path: "/fileHandle/download" },
+      //     { title: "导出", path: "/fileHandle/export" },
+      //   ],
+      // },
       {
-        title: "文件处理",
-        path: "/fileHandle/upload",
+        title: "权限",
+        path: "/auth/digest",
         collapsable: false,
-        children: [
-          { title: "上传", path: "/fileHandle/upload" },
-          { title: "下载", path: "/fileHandle/download" },
-          { title: "导出", path: "/fileHandle/export" },
-        ],
+        children: [{ title: "Digest", path: "/auth/digest" }],
       },
     ],
   },
