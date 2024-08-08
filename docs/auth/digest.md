@@ -1,10 +1,24 @@
 ---
-title: Digest
+title: Digest Auth
 comments: true
 tags:
   - Digest
   - 认证
 ---
+
+## 前言
+
+`Digest Auth` 即摘要认证，可以避免密码以明文方式传输，通常分为三个步骤：
+
+::: tip
+
+1. 客户端请求服务端，服务端不知道客户端是否真的知道密码，请求失败，返回 `401` ，并返回 `WWW-Authenticate` 字段，该字段中包含认证所需要的参数。
+2. 客户端根据 `WWW-Authenticate` 中的信息，选择加密算法，结合随机数 `cnonce`，计算出响应码 `response`。
+3. 最后带着响应码再次请求服务端，服务器将客户端提供的响应码与服务器内部计算出的结果进行对比。如果匹配，就说明客户端知道密码，认证通过；否则，认证失败。
+
+:::
+
+为了减少请求数量，这里将第 `1` 步改为前端请求一次后台接口来获取 `Digest` 认证所需的参数，并保存起来。后续请求图片时，直接走第 `2` 、`3` 步。
 
 ## 1. 获取参数
 
@@ -18,7 +32,7 @@ tags:
 const authInfo = {
   username: "admin", // 用户名
   password: "hhll^124", // 密码
-  realm: "9ee3667be2d1d1dbe08d7486", // realm
+  realm: "9ee3667be2d1d1dbe08d7486", // realm，一般是域名
   nonce: "67d46a542c07b990:9ee3667be2d1d1dbe08d7486:191223d7ff6:20b", // 服务器随机数
   algorithm: "MD5", // 算法
   qop: "auth", // 保护质量
@@ -80,7 +94,7 @@ export default {
 
 ---
 
-由于密码不能明文传输，所以需要对后台返回的密码进行解密处理，才能用于计算 `Digest`。
+由于密码不能明文传输，后台返回的密码是经过加密的，所以需要对密码进行解密，才能用于计算 `Digest`。
 
 安装 `CryptoJS`，用于加密、解密：
 
@@ -132,7 +146,7 @@ export default {
 
 ---
 
-随机数固定容易被破解，因此每次请求时客户端生成一个新的随机数。
+随机数 `cnonce` 固定容易被破解，因此每次请求时客户端生成一个新的随机数。
 
 模板可自行定义，这里为包含数字和字母的 `32` 位字符串:
 
@@ -230,7 +244,7 @@ export default {
 图片认证需要将 `Digest` 添加到请求头中的 `Authorization` 键中。
 
 ::: warning
-由于 `HTML` 中的 `<img>` 标签在获取、下载图片时是浏览器内部完成的，没有走前端封装好的 `axios` 请求，故无法在 `axios` 请求中添加请求头。
+由于 `HTML` 中的 `<img>` 标签获取图片是浏览器内部完成的，没有走前端封装好的 `axios` 请求，故无法在 `axios` 请求中添加请求头。
 :::
 
 因此，采用原生的 `XMLHttpRequest` 来实现图片请求:
@@ -273,7 +287,7 @@ export default {
 
 > 浏览器原本实现的是在 `图片` 栏，而此时是在 `Fetch/XHR` 栏。
 
-![截图](/images/screenshot/auth/digest/authImg1.png)
+<img :src="$withBase('/images/screenshot/auth/digest/authImg1.png')" alt="screenshot">
 
 ## 4. 提取公共组件
 
@@ -455,4 +469,4 @@ export default {
 
 效果如下：
 
-![截图](/images/screenshot/auth/digest/authImg2.png)
+<img :src="$withBase('/images/screenshot/auth/digest/authImg2.png')" alt="screenshot">

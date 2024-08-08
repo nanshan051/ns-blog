@@ -53,7 +53,7 @@ module.exports = {
         title: "权限",
         path: "/auth/digest",
         collapsable: false,
-        children: [{ title: "Digest", path: "/auth/digest" }],
+        children: [{ title: "Digest Auth", path: "/auth/digest" }],
       },
     ],
   },
