@@ -33,12 +33,6 @@ module.exports = {
     ],
     subSidebar: "auto",
     sidebar: [
-      {
-        title: "摘要",
-        path: "/",
-        collapsable: false, // 不折叠
-        children: [{ title: "简述", path: "/" }],
-      },
       // {
       //   title: "文件处理",
       //   path: "/fileHandle/upload",
