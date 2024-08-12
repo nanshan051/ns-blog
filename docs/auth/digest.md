@@ -18,7 +18,7 @@ tags:
 
 :::
 
-为了减少请求数量，这里将第 `1` 步改为前端请求一次后台接口来获取 `Digest` 认证所需的参数，并保存起来。后续请求图片时，直接走第 `2` 、`3` 步。
+为了减少请求数量，项目中将第 `1` 步改为：前端请求一次后台接口来获取 `Digest` 认证所需的参数，并保存起来。后续请求图片时，直接走第 `2` 、`3` 步。
 
 ## 1. 获取参数
 
@@ -287,7 +287,7 @@ export default {
 
 > 浏览器原本实现的是在 `图片` 栏，而此时是在 `Fetch/XHR` 栏。
 
-<img :src="$withBase('/images/screenshot/auth/digest/authImg1.png')" alt="screenshot">
+<img class="zoomable" :src="$withBase('/images/screenshot/auth/digest/1.png')" alt="screenshot">
 
 ## 4. 提取公共组件
 
@@ -469,4 +469,6 @@ export default {
 
 效果如下：
 
-<img :src="$withBase('/images/screenshot/auth/digest/authImg2.png')" alt="screenshot">
+<img class="zoomable" :src="$withBase('/images/screenshot/auth/digest/2.png')" alt="screenshot">
+
+<!-- ![图片](/ns-blog/images/screenshot/auth/digest/2.png) -->
