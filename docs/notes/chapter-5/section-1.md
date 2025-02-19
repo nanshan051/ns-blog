@@ -16,7 +16,7 @@ tags:
 ```vue
 <template>
   <div class="box">
-    中文xgp
+    中文Exgp
     <span></span>
   </div>
 </template>
@@ -253,7 +253,7 @@ i {
 
 ---
 
-### 3.3. 解决
+### 3.4. 解决
 
 实现绝对垂直居中的方法有很多，如利用 `flex` 布局、绝对定位等。
 
@@ -261,13 +261,15 @@ i {
 
 ---
 
+### 3.5. 解决方案一
+
 ::: tip 方案一：微调
 
-`vertical-align` 的值除了前面讲到的几个关键字（`baseline`等）外，还可以用长度来表示。
+`vertical-align` 的值除了前面讲到的几个关键字（ `baseline` 等）外，还可以用长度来表示。
 
-- 当长度为`0`时：等效于 `baseline`。
-- 当长度大于`0`时：元素向上偏移。
-- 当长度小于`0`时：元素向下偏移。
+- 当长度为 `0` 时：等效于 `baseline` 。
+- 当长度大于 `0` 时：元素向上偏移。
+- 当长度小于 `0` 时：元素向下偏移。
 
 通过前面的图可以看出，**基线对齐时，图标是偏上的，要想图标垂直居中，则需要向下偏移，** 所以要给 `vertical-align` 设置负值。
 
@@ -284,6 +286,8 @@ i {
 <img class="zoomable" :src="$withBase('/images/screenshot/notes/5/1/13.png')" alt="foo">
 
 ---
+
+### 3.6. 解决方案二
 
 ::: tip 方案二：重置字体大小
 
@@ -325,7 +329,7 @@ i {
 </style>
 ```
 
-::: tip 这么做的原理是什么呢？
+::: details <strong style="color:lightseagreen">这么做的原理是什么呢？</strong>
 
 - **第 1 步：** **将父元素的字体大小设为 `0`** 。这个时候，**父元素的顶线、中线、基线、底线和字母 `x` 的中点都处于同一条水平线**，其位置就是父元素行高的正中间位置。
 
@@ -338,6 +342,8 @@ i {
 <img class="zoomable" :src="$withBase('/images/screenshot/notes/5/1/14.png')" alt="foo">
 
 ---
+
+### 3.7. 解决方案三
 
 ::: tip 方案三：通过伪元素改变父元素 x 中心点位置
 
@@ -389,7 +395,7 @@ i {
 </style>
 ```
 
-::: tip 方案三是如何实现绝对垂直居中的呢？
+::: details <strong style="color:lightseagreen">方案三是如何实现绝对垂直居中的呢？</strong>
 
 - **第 1 步：** 取消父元素的行高，是为了让父元素在第 2 步中可以调节各个参考线的位置。
 
@@ -405,7 +411,7 @@ i {
 
 <img class="zoomable" :src="$withBase('/images/screenshot/notes/5/1/16.png')" alt="foo">
 
-## 3. 总结
+## 4. 总结
 
 `vertical-align` 在 `CSS` 中属于比较复杂的一个属性，而官方文档对 `vertical-align` 仅仅做了简单的介绍，没有详细的举例演示，也没有将其与 `font-size`、`line-height`、`基线` 等关联性很强的属性和概念串联起来讲解。
 
