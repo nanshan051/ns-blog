@@ -16,7 +16,6 @@ module.exports = {
     sidebar,
     sidebarDepth: 3,
     subSidebar: "auto",
-    lastUpdated: "Last Updated",
     smoothScroll: true,
   },
   markdown: {
